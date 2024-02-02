@@ -1,7 +1,7 @@
 const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
-const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
+const PERSON_IMG = "https://static.vecteezy.com/system/resources/previews/019/879/198/non_2x/user-icon-on-transparent-background-free-png.png";
 const chatWith = get(".chatWith");
 const typing = get(".typing");
 const chatStatus = get(".chatStatus");
@@ -14,6 +14,27 @@ msgerForm.addEventListener("submit", event => {
   if (!msgText) return;
 
   //    Código del envío
+  axios.post('/message/sent', {
+    message: msgText,
+    chat_id: 1
+  }).then( res => {
+
+    let data = res.data;
+
+    appendMessage(
+      data.user.name,
+      PERSON_IMG,
+      'right',
+      data.content,
+      formatDate(new Date(data.created_at))
+    );
+
+  }).catch( error => {
+
+    console.log('Ha ocurrido un error');
+    console.log(error);
+
+  });
 
   msgerInput.value = "";
 
