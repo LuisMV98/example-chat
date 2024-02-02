@@ -5,6 +5,7 @@ const PERSON_IMG = "https://static.vecteezy.com/system/resources/previews/019/87
 const chatWith = get(".chatWith");
 const typing = get(".typing");
 const chatStatus = get(".chatStatus");
+const chatId = window.location.pathname.substr(6);
 
 msgerForm.addEventListener("submit", event => {
 
@@ -61,6 +62,13 @@ function appendMessage(name, img, side, text, date) {
 
     msgerChat.scrollTop += 500;
   }
+
+//Echo
+  Echo.join(`chat.${chatId}`)
+    .listen('MessageSent', (e) => {
+        console.log(e)
+    })
+
 
 // Utils
 function get(selector, root = document) {

@@ -21,6 +21,8 @@ class MessageController extends Controller
 			'chat_id' => $request->chat_id
 		])->load('user');
 
+		broadcast(new MessageSent($message))->toOthers();
+
 		return $message;
 
 	}
