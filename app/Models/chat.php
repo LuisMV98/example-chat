@@ -14,6 +14,6 @@ class chat extends Model
     }
 
     public function messages(){
-        return $this->hasMany('App\Models\Messages');
+        return $this->hasMany('App\Models\Message');
     }
 }
